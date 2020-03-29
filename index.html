@@ -1,0 +1,45 @@
+<!DOCTYPE html><html><head>
+    <script src="p5.js"></script>
+    <script src="p5.dom.min.js"></script>
+    <script src="p5.sound.min.js"></script>
+    <script src="form.js"></script>
+    <script src="user.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.9.0/p5.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.9.0/addons/p5.dom.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.9.0/addons/p5.sound.min.js"></script>
+<script src="./p5.play.js"></script>
+
+<script src="https://www.gstatic.com/firebasejs/6.3.4/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/6.3.0/firebase-database.js"></script>
+
+<script>
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyDUx-5rGTqWZP6ti8Pi81g2aFvDSGIR7MA",
+    authDomain: "minutes-interval-timer.firebaseapp.com",
+    databaseURL: "https://minutes-interval-timer.firebaseio.com",
+    projectId: "minutes-interval-timer",
+    storageBucket: "minutes-interval-timer.appspot.com",
+    messagingSenderId: "859046992252",
+    appId: "1:859046992252:web:14b3a8bacc80acdc3a2cf9"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+</script>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <meta charset="utf-8">
+
+
+  </head>
+    <body>
+      <script src="sketch.js"></script>
+      <div id='canvascontainer'></div>
+      <p>
+        <button id='startButton'>Start</button>
+        <button id='stopButton'>Stop</button>
+        <button id='resetButton'>Reset</button>
+        <button id='breakButton'>Take a break</button>
+      </p>
+
+    </body>
+</html>
