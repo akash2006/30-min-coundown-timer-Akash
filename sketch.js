@@ -36,7 +36,7 @@ function preload(){
 
 function setup(){
   //create the canvas and pu it in a division
-  canvas = createCanvas(300,100);
+  canvas = createCanvas(300,200);
   canvas.parent('canvascontainer');
 
   //activate the startButton
@@ -77,13 +77,13 @@ function draw(){
   if(timerState === "off"){
   fill(255);
   textSize(32);
-  text("Time : 0 : 0 : 0",10,50); 
+  text("Time : 0 : 0 : 0",10,80); 
   }
   // when the timer is stopped
   if(timerState === "stop"){
     fill(255);
     textSize(32);
-    text("Time : " + hours + " : " + minutes + " : " + seconds,10,50);  
+    text("Time : " + hours + " : " + minutes + " : " + seconds,10,80);  
     }
 
   //start the timer
@@ -91,7 +91,7 @@ function draw(){
   if(timerState === "start"){
     fill(255);
     textSize(32);
-    text("Time : " + hours + " : " + minutes + " : " + seconds,10,50); 
+    text("Time : " + hours + " : " + minutes + " : " + seconds,10,80); 
 
     //increase the seconds
     if(frameCount%30 === 0){
@@ -113,9 +113,12 @@ function draw(){
     }
 
     //remind the user at every 30 minutes
-    if(minutes === 30){
+    if(minutes > 30 && minutes < 31){
       intSound.play();
-      
+      fill(255);
+      textSize(32);
+      text("It's break time",50,150);
+      text("Click on 'Take a break' button to take break",10,120); 
     }
   }
   // start break countdown
@@ -133,7 +136,7 @@ function draw(){
     }
 
     // decrease the seconds
-    if(frameCount%2 === 0){
+    if(frameCount%30 === 0){
       cdSec-=1;
       tCdSec-=1;
     }
@@ -198,5 +201,6 @@ takeBreak = ()=>{
   if(timerState === "start"){
     timerState = "break";
     breaks+=1;
+    intSound.stop();
   }
 }
