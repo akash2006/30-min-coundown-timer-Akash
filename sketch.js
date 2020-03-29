@@ -29,9 +29,9 @@ var userIndex;
 
 function preload(){
   //load the sounds
-  startSound = loadSound("sounds/startSound.mp3");
-  intSound = loadSound("sounds/intSound.mp3");
-  endSound = loadSound("sounds/endSound.mp3");
+  startSound = loadSound("startSound.mp3");
+  intSound = loadSound("intSound.mp3");
+  endSound = loadSound("endSound.mp3");
 }
 
 function setup(){
