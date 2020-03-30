@@ -20,6 +20,7 @@ class Timer{
             seconds = 0;
             minutes = 0;
             hours = 0;
+            tSec = 0;
             cdSec = 0;
             cdMin = 3;
             // remove(form.showResult());
