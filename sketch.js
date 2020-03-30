@@ -54,6 +54,12 @@ function setup(){
   // activate the breakButton
   var breakButton = select('#breakButton');
   breakButton.mousePressed(takeBreak);
+
+  // activate the power buttons
+  var onButton = select('#onButton');
+  onButton.mousePressed(powerOn);
+  var offButton = select('#offButton');
+  offButton.mousePressed(powerOff);
   
   //create the form
   form = new Form();
@@ -78,11 +84,17 @@ function draw(){
   
 
   //show the form
-  form.display();
+  // if(timerState === "off"){
+  //   form.hide();
+  // }
+  // else{
+    form.display();
+  // }
+  
   
   //show the display of the timer
   // when the timer is off
-  if(timerState === "off" || timerState === "submitted"){
+  if(timerState === "on" || timerState === "submitted"){
   fill(255);
   textSize(32);
   text("Time : 0 : 0 : 0",10,80); 
@@ -215,4 +227,12 @@ takeBreak = ()=>{
     breaks+=1;
     intSound.stop();
   }
+}
+
+// power functions
+powerOn = ()=>{
+  timer.updateState("on");
+}
+powerOff = ()=>{
+  timer.updateState("off");
 }
