@@ -39,28 +39,7 @@ function setup(){
   canvas = createCanvas(300,200);
   canvas.parent('canvascontainer');
 
-  //activate the startButton
-  var startButton = select('#startButton');
-  startButton.mousePressed(startCounting);
-
-  // activate the stopButton
-  var stopButton = select('#stopButton');
-  stopButton.mousePressed(stopCounting);
-
-  // activate the reset button
-  var resetButton = select('#resetButton');
-  resetButton.mousePressed(resetTimer);
-
-  // activate the breakButton
-  var breakButton = select('#breakButton');
-  breakButton.mousePressed(takeBreak);
-
-  // activate the power buttons
-  var onButton = select('#onButton');
-  onButton.mousePressed(powerOn);
-  var offButton = select('#offButton');
-  offButton.mousePressed(powerOff);
-  
+   
   //create the form
   form = new Form();
 
@@ -75,6 +54,29 @@ function setup(){
 
   // get the state
   timer.getState();
+
+  //activate the startButton
+  var startButton = select('#startButton');
+  startButton.mousePressed(startCounting);
+
+  // activate the stopButton
+  var stopButton = select('#stopButton');
+  stopButton.mousePressed(stopCounting);
+
+  // activate the reset button
+  var resetButton = select('#resetButton');
+  resetButton.mousePressed(timer.reset);
+
+  // activate the breakButton
+  var breakButton = select('#breakButton');
+  breakButton.mousePressed(takeBreak);
+
+  // activate the power buttons
+  var onButton = select('#onButton');
+  onButton.mousePressed(powerOn);
+  var offButton = select('#offButton');
+  offButton.mousePressed(powerOff);
+ 
 }
 
 function draw(){
@@ -207,18 +209,7 @@ stopCounting = ()=>{
   }
 }
 
-//reset the timer
-resetTimer = ()=>{
-  if(timerState === "stop"){
-    timer.updateState("submitted");
-    seconds = 0;
-    minutes = 0;
-    hours = 0;
-    cdSec = 0;
-    cdMin = 3;
-    // remove(form.showResult());
-  }
-}
+
 
 //pause the timer for three-minutes-break
 takeBreak = ()=>{
@@ -234,5 +225,8 @@ powerOn = ()=>{
   timer.updateState("on");
 }
 powerOff = ()=>{
+  timer.reset();
   timer.updateState("off");
+  form.clear();
+  
 }
