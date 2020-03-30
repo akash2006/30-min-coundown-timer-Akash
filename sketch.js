@@ -198,7 +198,7 @@ stopCounting = ()=>{
 //reset the timer
 resetTimer = ()=>{
   if(timerState === "stop"){
-    timer.updateState("off");
+    timer.updateState("submitted");
     seconds = 0;
     minutes = 0;
     hours = 0;
