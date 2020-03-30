@@ -16,6 +16,13 @@ class Form{
     //         this.button.hide();
     //     }
     // }
+
+    clear(){
+        this.input.value("Enter your name");
+        this.input.show();
+        this.button.show();
+    }
+
     display(){
         // if(timerState === "on"){
             this.input.position(10,130);
