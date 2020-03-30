@@ -171,7 +171,7 @@ function draw(){
       cdSec = 0;
     }
   }
- console.log(seconds);
+ console.log(tSec);
   
   
   // if(timerState === 2){
