@@ -12,4 +12,17 @@ class Timer{
             timerState:state
         })
     }
+
+    //reset the timer
+    reset(){
+        if(timerState === "stop"){
+            timer.updateState("submitted");
+            seconds = 0;
+            minutes = 0;
+            hours = 0;
+            cdSec = 0;
+            cdMin = 3;
+            // remove(form.showResult());
+        }
+    }
 }
