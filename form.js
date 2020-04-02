@@ -1,7 +1,9 @@
 class Form{
     constructor(){       
         this.input = createInput("Enter your name");
-        this.button = createButton("Submit");                    
+        this.button = createButton("Submit"); 
+        // this.button.addImage(submit);   
+        // this.button.scale = 0.25;                
         // this.input.html(setAttribute("placeholder","Enter your name"));    
         this.greeting = createElement('h2');        
         // this.button.parent("#submit");
@@ -25,8 +27,10 @@ class Form{
 
     display(){
         // if(timerState === "on"){
-            this.input.position(10,130);
-            this.button.position(200,130)
+            this.input.position(200,50);
+            this.button.position(390,50);
+            
+            // this.button.addImage(submit);
             if(timerState === "on"){
                 this.button.mousePressed(()=>{
                     timer.updateState("submitted");
@@ -35,11 +39,11 @@ class Form{
                     this.input.hide();
                     this.button.hide();
                     user.name = this.input.value();
-                    user.getUserCount();
-                    userCount+=1;
-                    user.index = userCount;
-                    user.updateCount(userCount);
-                    
+                    // user.getUserCount();
+                    // userCount+=1;
+                    // user.index = userCount;
+                    // user.updateCount(userCount);
+                    user.updateName();
                     this.greeting.html("Hello "+ user.name);
                     this.instruct.html("Please click on 'start' button to start counting");
                 })  
@@ -52,13 +56,15 @@ class Form{
     //     finHours = hours;
     // }
     showResult(){
-        this.result.html("Result:");
-        this.time.html("Time worked : "+hours+" : "+minutes+" : "+seconds);
-        this.breaks.html("Breaks taken : "+breaks);
-        this.saveButton = createButton("Save Result");
-        this.saveButton.mousePressed(()=>{
-            user.update();
-        })
+        if(timerState === "stop"){
+            this.result.html("Result:");
+            this.time.html("Time worked : "+hours+" : "+minutes+" : "+seconds);
+            this.breaks.html("Breaks taken : "+breaks);
+            // this.saveButton = createButton("Save Result");
+            // this.saveButton.mousePressed(()=>{
+            //     user.updateDetails();
+            // })  
+        }
     }
     // saveResult(){
 
