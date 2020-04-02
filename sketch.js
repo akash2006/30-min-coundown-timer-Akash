@@ -99,7 +99,7 @@ function setup(){
 function draw(){
  
   //set the background colour
-  background(backgroundImage);
+//   background(backgroundImage);
 
   
 
