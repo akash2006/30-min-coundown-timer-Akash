@@ -63,7 +63,7 @@ function setup(){
   user = new User();
 
   // create the timer;
-  timer = new Timer
+  timer = new Timer();
 
   // get the state
   timer.getState1();
