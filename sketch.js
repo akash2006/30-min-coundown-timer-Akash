@@ -27,16 +27,29 @@ var database;
 // initialize the userIndex variable
 var userIndex;
 
+// initialize the picture variables
+var bg;
+var submit;
+
+// create the time getting variables
+var hr, min, sec, dy, mon, yr;
+
 function preload(){
   //load the sounds
   startSound = loadSound("sounds/startSound.mp3");
   intSound = loadSound("sounds/intSound.mp3");
   endSound = loadSound("sounds/endSound.mp3");
+
+  // load the background picture
+  bg = loadImage("pics/bg.jfif");
+
+  // load the submit button
+  // submit = loadImage("pics/submit.png");
 }
 
 function setup(){
   //create the canvas and pu it in a division
-  canvas = createCanvas(300,200);
+  canvas = createCanvas(600,400);
   canvas.parent('canvascontainer');
 
    
@@ -53,7 +66,7 @@ function setup(){
   timer = new Timer
 
   // get the state
-  timer.getState();
+  timer.getState1();
 
   //activate the startButton
   var startButton = select('#startButton');
@@ -74,14 +87,17 @@ function setup(){
   // activate the power buttons
   var onButton = select('#onButton');
   onButton.mousePressed(powerOn);
+  
   var offButton = select('#offButton');
   offButton.mousePressed(powerOff);
+  
+  
  
 }
 
 function draw(){
   //set the background colour
-  background(0);
+  background(bg);
 
   
 
@@ -98,22 +114,22 @@ function draw(){
   // when the timer is off
   if(timerState === "on" || timerState === "submitted"){
   fill(255);
-  textSize(32);
-  text("Time : 0 : 0 : 0",10,80); 
+  textSize(74);
+  text("Time : 0 : 0 : 0",50,200); 
   }
   // when the timer is stopped
   if(timerState === "stop"){
     fill(255);
-    textSize(32);
-    text("Time : " + hours + " : " + minutes + " : " + seconds,10,80);  
+    textSize(74);
+    text("Time : " + hours + " : " + minutes + " : " + seconds,50,200);  
     }
 
   //start the timer
   //start counting
   if(timerState === "start"){
     fill(255);
-    textSize(32);
-    text("Time : " + hours + " : " + minutes + " : " + seconds,10,80); 
+    textSize(74);
+    text("Time : " + hours + " : " + minutes + " : " + seconds,50,200); 
 
     //increase the seconds
     if(frameCount%30 === 0){
@@ -138,17 +154,17 @@ function draw(){
     if(minutes > 30 && minutes < 31){
       intSound.play();
       fill(255);
-      textSize(32);
-      text("It's break time",50,150);
-      text("Click on 'Take a break' button to take break",10,120); 
+      textSize(74);
+      text("It's break time",150,100);
+      text("Click on 'Take a break' button to take break",10,200); 
     }
   }
   // start break countdown
   if(timerState === "break"){
     // show the countdown time
     fill(255);
-    textSize(28);
-    text("Break ends in : "+cdMin+" : "+cdSec,10,50);
+    textSize(60);
+    text("Break ends in : "+cdMin+" : "+cdSec,10,200);
     
     // decrease the minutes
     if(cdSec === 0){
@@ -185,6 +201,7 @@ function draw(){
     userCount = data.val();
   })
   
+  drawSprites();
 }
 //start counting
 startCounting = ()=>{  
@@ -205,6 +222,18 @@ stopCounting = ()=>{
     user.secondsWorked = tSec;
     //set the number of breaks taken
     user.breaksTaken = breaks;
+
+    hr = hour();
+    min = minute();
+    sec = second();
+    dy = day();
+    mon = month();
+    yr = year();
+    var localtime = [];
+    localtime.push(dy,mon,yr,hr,min,sec);
+    user.eT = localtime;
+
+    user.updateDetails();
     
   }
 }
@@ -221,8 +250,28 @@ takeBreak = ()=>{
 }
 
 // power functions
-powerOn = ()=>{
-  timer.updateState("on");
+powerOn = ()=>{  
+  // timer.getState1();
+  if(timerState === "off"){
+    // get the local time of the user
+    hr = hour();
+    min = minute();
+    sec = second();
+    dy = day();
+    mon = month();
+    yr = year();
+    var localtime = [];
+    localtime.push(dy,mon,yr,hr,min,sec);
+    user.sT = localtime;
+    user.getUserCount();
+    userCount+=1;
+    user.index= userCount;  
+    user.updateCount(userCount);
+    user.timerState = "on";
+    user.update();
+    timer.getState2();
+  }
+  // timer.updateState("on");
 }
 powerOff = ()=>{
   timer.reset();
