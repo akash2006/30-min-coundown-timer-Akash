@@ -4,6 +4,9 @@ class User{
         this.secondsWorked = 0;
         this.breaksTaken = 0;
         this.name = null;
+        this.timeState = null;
+        this.sT = null;
+        this.eT = null;
     }
     
     getUserCount(){
@@ -22,10 +25,24 @@ class User{
     update(){
         userIndex = "users/user"+this.index;
         database.ref(userIndex).set({
-            name:this.name,
-            secondsWorked:this.secondsWorked,
-            breaksTaken:this.breaksTaken            
+            startTime:this.sT,
+            timerState:this.timerState            
         });
+    }
+
+    updateDetails(){
+        database.ref("users/user"+this.index+"/").update({
+            endTime:this.eT,
+            secondsWorked:this.secondsWorked,
+            breaksTaken:this.breaksTaken
+        });
+        
+    }
+
+    updateName(){
+        database.ref("users/user"+this.index+"/").update({
+            name:this.name
+        })
     }
 
     // updateResult(){
