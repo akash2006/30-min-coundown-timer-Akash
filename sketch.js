@@ -1,5 +1,5 @@
 //initiate the time-element variables
-var seconds = 00, minutes = 00, hours = 00, tSec = 00;
+var seconds = 00, minutes = 00, hours = 00, tSec = 00, tMin = 00;
 var finSeconds,finMinutes,finHours;
 var breaks = 0;
 
@@ -28,7 +28,8 @@ var database;
 var userIndex;
 
 // initialize the picture variables
-var bg;
+var bg = "pics/bg-dusk.jpg";
+var backgroundImage
 var submit;
 
 // create the time getting variables
@@ -39,9 +40,9 @@ function preload(){
   startSound = loadSound("sounds/startSound.mp3");
   intSound = loadSound("sounds/intSound.mp3");
   endSound = loadSound("sounds/endSound.mp3");
-
+  getBackgroundImg(bg);
   // load the background picture
-  bg = loadImage("pics/bg.jfif");
+  backgroundImage = loadImage(bg);
 
   // load the submit button
   // submit = loadImage("pics/submit.png");
@@ -63,7 +64,7 @@ function setup(){
   user = new User();
 
   // create the timer;
-  timer = new Timer();
+  timer = new Timer
 
   // get the state
   timer.getState1();
@@ -96,8 +97,9 @@ function setup(){
 }
 
 function draw(){
+ 
   //set the background colour
-  background(bg);
+  background(backgroundImage);
 
   
 
@@ -141,6 +143,7 @@ function draw(){
     if(seconds === 60){
       seconds=00;
       minutes+=1;
+      tMin+=1;
     }
 
     //increase the hours
@@ -151,12 +154,13 @@ function draw(){
     }
 
     //remind the user at every 30 minutes
-    if(minutes > 30 && minutes < 31){
+    if(tMin%30 === 0 && tMin>0){
       intSound.play();
       fill(255);
       textSize(74);
-      text("It's break time",150,100);
-      text("Click on 'Take a break' button to take break",10,200); 
+      text("It's break time",50,100);
+      textSize(28);
+      text("Click on 'Take a break' button to take break",10,250); 
     }
   }
   // start break countdown
@@ -187,7 +191,7 @@ function draw(){
       cdSec = 0;
     }
   }
- console.log(tSec);
+ console.log(tMin);
   
   
   // if(timerState === 2){
@@ -278,4 +282,16 @@ powerOff = ()=>{
   timer.updateState("off");
   form.clear();
   
+}
+
+getBackgroundImg = async (bg)=>{
+  hr = hour();
+  min = minute();
+  sec = second();
+  if(hr>06&&hr<18){
+    bg = "pics/bg-dusk.jpg";
+  }
+  else{
+    bg = "pics/bg-night.jpg";
+  }
 }
