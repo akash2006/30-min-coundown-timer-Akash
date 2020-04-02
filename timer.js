@@ -1,14 +1,21 @@
 class Timer{
     constructor(){}
-    getState(){
+    getState1(){
         var stateRef = database.ref("timerState");
         stateRef.on("value",(data)=>{
             timerState = data.val();
         })
     }
 
+    getState2(){
+        var stateRef = database.ref("users/user"+user.index+"/timerState");
+        stateRef.on("value",(data)=>{
+            timerState = data.val();
+        })
+    }
+
     updateState(state){
-        database.ref('/').update({
+        database.ref('users/user'+user.index+'/').update({
             timerState:state
         })
     }
@@ -23,6 +30,7 @@ class Timer{
             tSec = 0;
             cdSec = 0;
             cdMin = 3;
+            breaks= 0;
             // remove(form.showResult());
         }
     }
